@@ -24,11 +24,10 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.header.writers.StaticHeadersWriter;
 
 
-/*
-* To enable HTTP Security in Spring
-*/
+// Configure security settings for Spring app 
+
 @Configuration
-@EnableWebSecurity  // Beans to enable basic Web security
+@EnableWebSecurity  // Enable basic Web security features
 @EnableMethodSecurity(prePostEnabled = true)
 public class SecurityConfig {
 
@@ -46,11 +45,9 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
+	// Configures the authentication manager to load user details 
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		// configure AuthenticationManager so that it knows from where to load
-		// user for matching credentials
-		// Use BCryptPasswordEncoder
 		auth.userDetailsService(personDetailsService).passwordEncoder(passwordEncoder());
 	}
 
@@ -58,24 +55,25 @@ public class SecurityConfig {
 	public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
 		return authenticationConfiguration.getAuthenticationManager();
 	}
-
 	
-    // Provide security configuration
+    // Configure security settings, including CORS 
 		@Bean
 		public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 			http
 				.csrf(csrf -> csrf
 					.disable()
 				)
-				// list the requests/endpoints need to be authenticated
+				// List the requests/endpoints that need to be authenticated
 				.authorizeHttpRequests(auth -> auth
 					.requestMatchers("/authenticate").permitAll()
 					.requestMatchers("/mvc/person/update/**", "/mvc/person/delete/**").authenticated()
 					.requestMatchers("/api/person/post/**", "/api/person/delete/**").authenticated()
 					.requestMatchers("/**").permitAll()
 				)
-				// support cors
+				// CORS support is enabled within the security configuration
 				.cors(Customizer.withDefaults())
+				// Set up specific headers related to CORS
+				// Ensure that the necessary headers are included in the HTTP responses
 				.headers(headers -> headers
 					.addHeaderWriter(new StaticHeadersWriter("Access-Control-Allow-Credentials", "true"))
 					.addHeaderWriter(new StaticHeadersWriter("Access-Control-Allow-ExposedHeaders", "*", "Authorization"))
@@ -91,11 +89,11 @@ public class SecurityConfig {
 					.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 					.logoutSuccessUrl("/")
 				)
-				// make sure we use stateless session; 
-				// session won't be used to store user's state.
 				.exceptionHandling(exceptions -> exceptions
 					.authenticationEntryPoint(jwtAuthenticationEntryPoint)
 				)
+				// Configures the session management to use a stateless approach--> Server does not store session information on the server-side between requests --> all the necessary information for authentication is contained within each request
+				// Pro: more scalable, servers can handle requests independently 
 				.sessionManagement(session -> session
 					.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 				)
