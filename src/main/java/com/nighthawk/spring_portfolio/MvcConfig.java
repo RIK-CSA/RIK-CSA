@@ -1,4 +1,5 @@
 package com.nighthawk.spring_portfolio;
+
 import org.springframework.context.annotation.*;
 import org.springframework.web.servlet.config.annotation.*;
 
@@ -13,13 +14,14 @@ public class MvcConfig implements WebMvcConfigurer {
     }
 
     // Configures the location for uploaded files outside the app's resources
-    // CRUCIAL for file upload functionality -> make sure files stored and can be accessed properly by frontend
+    // CRUCIAL for file upload functionality -> make sure files stored and can be
+    // accessed properly by frontend
     @Override
     public void addResourceHandlers(final ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/volumes/uploads/**").addResourceLocations("file:volumes/uploads/");
     }
 
-    // Sets up CORS settings --> allows requests from specified origins 
+    // Sets up CORS settings --> allows requests from specified origins
     // This case is GitHub Pages site & local dev site
     @Override
     public void addCorsMappings(CorsRegistry registry) {
