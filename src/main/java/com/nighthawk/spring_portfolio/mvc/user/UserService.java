@@ -20,7 +20,7 @@ public class UserService {
 
     public User login(User user) {
         var userIndex = IntStream.range(0, USERS_LIST.size())
-            .filter(i -> USERS_LIST.get(i).getEmail().equals(user.getEmail))
+            .filter(i -> USERS_LIST.get(i).getEmail().equals(user.getEmail()))
             .findAny()
             .orElseThrow(() -> new RuntimeException("User not found"));
         var cUser = USERS_LIST.get(userIndex);
@@ -33,7 +33,7 @@ public class UserService {
 
     public void logout(String email) {
         var userIndex = IntStream.range(0, USERS_LIST.size())
-            .filter(i -> USERS_LIST.get(i).getEmail().equals(user.getEmail))
+            .filter(i -> USERS_LIST.get(i).getEmail().equals(email))
             .findAny()
             .orElseThrow(() -> new RuntimeException("User not found"));
         USERS_LIST.get(userIndex).setStatus("offline");
