@@ -1,17 +1,12 @@
 package com.nighthawk.spring_portfolio.mvc.user;
 
-import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import groovy.util.logging.Slf4j;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
-
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.GetMapping;
 
 
 @RestController
@@ -47,9 +42,9 @@ public class UserController {
     public ResponseEntity<String> handle(Exception ex) {
         ex.printStackTrace();
         return ResponseEntity
-            .status(INTERNAL_SERVER_ERROR)
+            .status(HttpStatus.INTERNAL_SERVER_ERROR)
             .body(ex.getMessage());
-            
+
         
     }
 }
