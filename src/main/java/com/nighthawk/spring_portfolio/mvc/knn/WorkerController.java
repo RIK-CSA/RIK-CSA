@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,6 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 // Add necessary Spring Boot annotations and imports
 @RestController
 @RequestMapping("/api/worker")
+@CrossOrigin(origins = { "http://127.0.0.1:4100", "https://rik-csa.github.io/RIK-CSA-frontend/" }) // Add the origin of
+                                                                                                   // your frontend
+                                                                                                   // application
 public class WorkerController {
 
     private List<Worker> workers = new ArrayList<>(); // Initialize your worker list
