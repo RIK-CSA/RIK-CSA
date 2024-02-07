@@ -47,6 +47,8 @@ public class WorkerController {
                 "Pittsburgh, Pennsylvania", false));
         workers.add(new Worker("Amanda Wang", Arrays.asList("Java, C++, Matlab, C"), "Pittsburgh, Pennsylvania", true));
         workers.add(new Worker("Haerin Lu", Arrays.asList("C, E, PHP"), "Nashville, Tennessee", true));
+        workers.add(new Worker("Allen Lu", Arrays.asList("Python, E, PHP"), "Pittsburgh, Pennsylvania", true));
+        workers.add(new Worker("Allen Xu", Arrays.asList("PHP"), "Pittsburgh, Pennsylvania", true));
         workers.add(new Worker("Aidan Xu", Arrays.asList("Python, Java, C++,C#,Go,Swift, Matlab, HTML,D"),
                 "Nashville, Tennessee", true));
         workers.add(new Worker("Andrea Park", Arrays.asList("PHP, Java, C++, Javascript", "Ruby", "Go"),
