@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 // Add necessary Spring Boot annotations and imports
 @RestController
 @RequestMapping("/api/worker")
-// @CrossOrigin(origins = "https://rik-csa.github.io/") // Add the origin of
-@CrossOrigin(origins = "http://127.0.0.1:4100/") // Add the origin of
+@CrossOrigin(origins = "https://rik-csa.github.io/") // Add the origin of
+// @CrossOrigin(origins = "http://127.0.0.1:4100/") // Add the origin of
 // your frontend
 // application
 public class WorkerController {
