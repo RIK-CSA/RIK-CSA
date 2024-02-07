@@ -16,9 +16,10 @@ import org.springframework.web.bind.annotation.RestController;
 // Add necessary Spring Boot annotations and imports
 @RestController
 @RequestMapping("/api/worker")
-@CrossOrigin(origins = "https://rik-csa.github.io/") // Add the origin of
-                                                     // your frontend
-                                                     // application
+// @CrossOrigin(origins = "https://rik-csa.github.io/") // Add the origin of
+@CrossOrigin(origins = "http://127.0.0.1:4100/") // Add the origin of
+// your frontend
+// application
 public class WorkerController {
 
     private List<Worker> workers = new ArrayList<>(); // Initialize your worker list
@@ -40,11 +41,17 @@ public class WorkerController {
         workers.add(new Worker("Joseph Youm", Arrays.asList("Javascript, HTML, Go, C#, C++"), "San Diego", true));
         workers.add(new Worker("Alex Xiao", Arrays.asList("Javascript, HTML"), "Pittsburgh, Pennsylvania", true));
         workers.add(new Worker("Amanda Yang", Arrays.asList("Python"), "Austin, Texas", true));
-        workers.add(new Worker("Ellen Kang", Arrays.asList("Java, C++, Matlab"), "Pittsburgh, Pennsylvania", true));
-        workers.add(new Worker("Amanda Wang", Arrays.asList("Java, C++, Matlab"), "Pittsburgh, Pennsylvania", true));
-        workers.add(new Worker("Andrea Park", Arrays.asList("Java, C++, Javascript", "Ruby", "Go"),
+        workers.add(
+                new Worker("Ellen Kang", Arrays.asList("Java, C++, Matlab, HTML"), "Pittsburgh, Pennsylvania", true));
+        workers.add(new Worker("Brian J. Wang", Arrays.asList("PHP, Python, Java, C++, Matlab, C, CSS, Ruby"),
+                "Pittsburgh, Pennsylvania", false));
+        workers.add(new Worker("Amanda Wang", Arrays.asList("Java, C++, Matlab, C"), "Pittsburgh, Pennsylvania", true));
+        workers.add(new Worker("Haerin Lu", Arrays.asList("C, E, PHP"), "Nashville, Tennessee", true));
+        workers.add(new Worker("Aidan Xu", Arrays.asList("Python, Java, C++,C#,Go,Swift, Matlab, HTML,D"),
+                "Nashville, Tennessee", true));
+        workers.add(new Worker("Andrea Park", Arrays.asList("PHP, Java, C++, Javascript", "Ruby", "Go"),
                 "Ithaca, New York", true));
-        workers.add(new Worker("Joshua Kim", Arrays.asList("Python, Java, C++", "Matlab", "Javascript"),
+        workers.add(new Worker("Joshua Kim", Arrays.asList("Java, C++", "Matlab", "Javascript"),
                 "Pittsburgh, Pennsylvania", true));
     }
 
