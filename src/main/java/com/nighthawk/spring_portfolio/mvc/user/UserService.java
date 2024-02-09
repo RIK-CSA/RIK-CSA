@@ -17,18 +17,20 @@ public class UserService {
         USERS_LIST.add(user);
     }
 
-    public User login(User user) {
-        var userIndex = IntStream.range(0, USERS_LIST.size())
-            .filter(i -> USERS_LIST.get(i).getEmail().equals(user.getEmail()))
-            .findAny()
-            .orElseThrow(() -> new RuntimeException("User not found"));
-        var cUser = USERS_LIST.get(userIndex);
-        if (!cUser.getPassword().equals(user.getPassword())) {
+    public User login(String email, String password) {
+        User user = USERS_LIST.stream()
+                .filter(u -> u.getEmail().equals(email))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        if (!user.getPassword().equals(password)) {
             throw new RuntimeException("Password incorrect");
         }
-        cUser.setStatus("online");
-        return cUser;
+
+        user.setStatus("online");
+        return user;
     }
+
 
     public void logout(String email) {
         var userIndex = IntStream.range(0, USERS_LIST.size())
