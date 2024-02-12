@@ -44,7 +44,7 @@ The last annotation connect to database
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Convert(attributeName ="person", converter = JsonType.class)
+@Convert(attributeName = "person", converter = JsonType.class)
 public class Person {
 
     // automatic unique identifier for Person record
@@ -54,15 +54,16 @@ public class Person {
 
     // email, password, roles are key attributes to login and authentication
     @NotEmpty
-    @Size(min=5)
-    @Column(unique=true)
+    @Size(min = 5)
+    @Column(unique = true)
     @Email
     private String email;
 
     @NotEmpty
     private String password;
 
-    // @NonNull, etc placed in params of constructor: "@NonNull @Size(min = 2, max = 30, message = "Name (2 to 30 chars)") String name"
+    // @NonNull, etc placed in params of constructor: "@NonNull @Size(min = 2, max =
+    // 30, message = "Name (2 to 30 chars)") String name"
     @NonNull
     @Size(min = 2, max = 30, message = "Name (2 to 30 chars)")
     private String name;
@@ -74,18 +75,18 @@ public class Person {
     @ManyToMany(fetch = EAGER)
     private Collection<PersonRole> roles = new ArrayList<>();
 
-    /* HashMap is used to store JSON for daily "stats"
-    "stats": {
-        "2022-11-13": {
-            "calories": 2200,
-            "steps": 8000
-        }
-    }
-    */
+    /*
+     * HashMap is used to store JSON for daily "stats"
+     * "stats": {
+     * "2022-11-13": {
+     * "calories": 2200,
+     * "steps": 8000
+     * }
+     * }
+     */
     @JdbcTypeCode(SqlTypes.JSON)
     @Column(columnDefinition = "jsonb")
-    private Map<String,Map<String, Object>> stats = new HashMap<>(); 
-    
+    private Map<String, Map<String, Object>> stats = new HashMap<>();
 
     // Constructor used when building object from an API
     public Person(String email, String password, String name, Date dob) {
@@ -99,11 +100,12 @@ public class Person {
     public int getAge() {
         if (this.dob != null) {
             LocalDate birthDay = this.dob.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-            return Period.between(birthDay, LocalDate.now()).getYears(); }
+            return Period.between(birthDay, LocalDate.now()).getYears();
+        }
         return -1;
     }
 
-    // Initialize static test data 
+    // Initialize static test data
     public static Person[] init() {
 
         // basics of class construction
@@ -112,7 +114,7 @@ public class Person {
         p1.setEmail("toby@gmail.com");
         p1.setPassword("123Toby!");
         // adding Note to notes collection
-        try {  // All data that converts formats could fail
+        try { // All data that converts formats could fail
             Date d = new SimpleDateFormat("MM-dd-yyyy").parse("01-01-1840");
             p1.setDob(d);
         } catch (Exception e) {
@@ -160,8 +162,8 @@ public class Person {
         }
 
         // Array definition and data initialization
-        Person persons[] = {p1, p2, p3, p4, p5};
-        return(persons);
+        Person persons[] = { p1, p2, p3, p4, p5 };
+        return (persons);
     }
 
     public static void main(String[] args) {
@@ -169,8 +171,8 @@ public class Person {
         Person persons[] = init();
 
         // iterate using "enhanced for loop"
-        for( Person person : persons) {
-            System.out.println(person);  // print object
+        for (Person person : persons) {
+            System.out.println(person); // print object
         }
     }
 

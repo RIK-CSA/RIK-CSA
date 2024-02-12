@@ -11,7 +11,7 @@ public class ProfileController {
     public String showProfilePage(Model model) {
         // Assuming you have a user object with username and additional details
         // You can replace it with your actual user object
-        String username = "JohnDoe";
+        String username = "John Mort";
         String pastExperiences = "Worked at ABC Company, Software Engineer";
         String honorsAndAwards = "Employee of the Month, 2020";
 
